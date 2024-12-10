@@ -192,6 +192,7 @@ if [ "$PRINT_ONLY" = true ]; then
 		echo "CHANNEL=$info_channel"
 		echo "VERSION=$info_version"
 		# VERSION_FILE is not printed, because it is essentially same as VERSION
+		echo "GIT_SOURCE=$GIT_SOURCE"
 		echo "ARCHITECTURE=$info_architecture"
 		echo "CACHE-KEY=$CACHE_KEY"
 		echo "CACHE-PATH=$CACHE_PATH"
@@ -199,10 +200,13 @@ if [ "$PRINT_ONLY" = true ]; then
 		echo "PUB-CACHE-PATH=$PUB_CACHE"
 		exit 0
 	fi
+	exit 0
+fi
 
 	{
 		echo "CHANNEL=$info_channel"
 		echo "VERSION=$info_version"
+		echo "GIT_SOURCE=$GIT_SOURCE"
 		# VERSION_FILE is not printed, because it is essentially same as VERSION
 		echo "ARCHITECTURE=$info_architecture"
 		echo "CACHE-KEY=$CACHE_KEY"
@@ -210,9 +214,6 @@ if [ "$PRINT_ONLY" = true ]; then
 		echo "PUB-CACHE-KEY=$PUB_CACHE_KEY"
 		echo "PUB-CACHE-PATH=$PUB_CACHE"
 	} >>"${GITHUB_OUTPUT:-/dev/null}"
-
-	exit 0
-fi
 
 if [ ! -x "$CACHE_PATH/bin/flutter" ]; then
 	if [ "$CHANNEL" = "master" ] || [ "$CHANNEL" = "main" ]; then
