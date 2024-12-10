@@ -200,8 +200,6 @@ if [ "$PRINT_ONLY" = true ]; then
 		echo "PUB-CACHE-PATH=$PUB_CACHE"
 		exit 0
 	fi
-	exit 0
-fi
 
 	{
 		echo "CHANNEL=$info_channel"
@@ -214,6 +212,14 @@ fi
 		echo "PUB-CACHE-KEY=$PUB_CACHE_KEY"
 		echo "PUB-CACHE-PATH=$PUB_CACHE"
 	} >>"${GITHUB_OUTPUT:-/dev/null}"
+
+	exit 0
+fi
+
+{
+	echo "GIT_SOURCE=$GIT_SOURCE"
+	echo "VERSION=$VERSION"
+} >>"${GITHUB_ENV:-/dev/null}"
 
 if [ ! -x "$CACHE_PATH/bin/flutter" ]; then
 	if [ "$CHANNEL" = "master" ] || [ "$CHANNEL" = "main" ]; then
